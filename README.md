@@ -26,3 +26,5 @@ Pour le Code Officiel Géographique :
 J'ai longtemps utilisé le site de Philippe Gervais sur les [Décès depuis 1970](https://web.archive.org/web/20251006125609/http://phgervais.free.fr/pc_index.php) pour mes recherches généalogiques, mais depuis la fin 2025 celui-ci n'est [plus accessible](http://phgervais.free.fr/pc_index.php).
 
 J'ai donc décidé de faire ma propre application... avant de m'apercevoir qu'il y en avait déjà [plein d'autres](https://search.brave.com/search?q=d%C3%A9c%C3%A8s+depuis+1970) ! Mais ce n'est pas grave car je préfère ma version 😃
+
+D'ailleurs si vous l'appréciez aussi, n'hésitez pas à lui décerner une ⭐ !
