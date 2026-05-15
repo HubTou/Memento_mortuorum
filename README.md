@@ -9,7 +9,7 @@ Ce logiciel est composé :
 * La dorsale a été écrite en langage [Python](https://www.python.org/), pour importer les [fichiers CSV](https://fr.wikipedia.org/wiki/Comma-separated_values) sources, les nettoyer, et générer une base de données [SQLite](https://sqlite.org/).
 * Le frontal a été généré en langage [PHP](https://www.php.net/) avec [Claude Sonnet 4.6](https://www.anthropic.com/claude/sonnet), afin de (re)tester le [vibe coding](https://fr.wikipedia.org/wiki/Vibe_coding) et finalisé manuellement :
   * Le test a été tout à fait satisfaisant ! 
-* Les scripts ont été écrits dans la [variante SQLite](https://www.tutorialspoint.com/sqlite/index.htm) du langage [SQL](https://fr.wikipedia.org/wiki/Structured_Query_Language).
+* Les scripts ont été écrits dans la [variante SQLite](https://www.tutorialspoint.com/sqlite/index.htm) du langage [SQL](https://fr.wikipedia.org/wiki/Structured_Query_Language), en [Bourne shell](https://fr.wikipedia.org/wiki/Bourne_shell) ou en Python.
 
 Les lieux de naissance et de décès sont représentés à l'aide du [Code Officiel Géographique (COG)](https://www.insee.fr/fr/metadonnees/source/serie/s2084) de l'INSEE, qui est donc importé dans la base de données.
 
