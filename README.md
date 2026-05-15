@@ -3,7 +3,7 @@ Ce logiciel est composé :
 * d'une dorsale en ligne de commande permettant de créer une base de données à partir des [Fichiers des personnes décédées depuis 1970](https://www.insee.fr/fr/information/4190491) distribués par l'[INSEE](https://www.insee.fr/fr/accueil).
 * d'un frontal Web permettant d'effectuer des recherches dans cette base de données :
   * Ce frontal est également proposé en tant que [service en ligne](https://deces.famille.eu.org/), afin que chacun puisse l'exploiter librement sans pré-requis de connaissances ou d'infrastructures techniques.
-* de scripts permettant de générer des statistiques sur le contenu de la base de données.
+* de scripts permettant de générer des statistiques sur le contenu de la base de données, d'orchestrer les tâches récurrentes et d'un utilitaire de croisement entre cette base de données et un fichier d'export GEDCOM
 
 ### Implémentation technique
 * La dorsale a été écrite en langage [Python](https://www.python.org/), pour importer les [fichiers CSV](https://fr.wikipedia.org/wiki/Comma-separated_values) sources, les nettoyer, et générer une base de données [SQLite](https://sqlite.org/).
