@@ -1,0 +1,32 @@
+</div>
+
+<script>
+document.querySelectorAll('.stat-block-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        this.closest('.stat-block').classList.toggle('open');
+    });
+});
+</script>
+
+<footer class="ribbon">
+    <a href="https://github.com/HubTou" target="_blank" rel="noopener noreferrer">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="8" cy="5" r="2.5"/><path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5"/>
+        </svg>
+        À propos de l'auteur
+    </a>
+    <a href="https://github.com/HubTou/Memento_mortuorum" target="_blank" rel="noopener noreferrer">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="5,4 1,8 5,12"/><polyline points="11,4 15,8 11,12"/>
+        </svg>
+        Code source
+    </a>
+    <a href="https://www.insee.fr/fr/information/4190491" target="_blank" rel="noopener noreferrer">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="5,4 1,8 5,12"/><polyline points="11,4 15,8 11,12"/>
+        </svg>
+        Données sources
+    </a>
+</footer>
+</body>
+</html>
