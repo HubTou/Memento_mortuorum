@@ -31,7 +31,7 @@ class Severite(Enum):
     CRITIQUE = 8
     DONNEES_ERRONEES = 7
     ERREUR = 6
-    DONNEES_INCONSISTANTES = 4
+    DONNEES_INCONSISTANTES = 5
     AVERTISSEMENT = 4
     DONNEES_MANQUANTES = 3
     INFORMATION_IMPORTANTE = 2
@@ -817,7 +817,7 @@ def InsererFichierDeDeces(nom_fichier, oppositions, cog, table_prenoms):
             else:
                 date_naissance += jour_naissance
 
-            # recherche de fates impossibles (ex: 19000229, xxxx0631)
+            # recherche de dates impossibles (ex: 19000229, xxxx0631)
             try:
                 _ = datetime.date.fromisoformat(date_naissance)
             except:
