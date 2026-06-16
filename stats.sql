@@ -13,6 +13,7 @@
 .output ../stats.txt
 
 .print "@block:open"
+.print "@name:dernier-deces"
 .print "@title:Dernier décès enregistré"
 .print "@subtitle:(les dernières données disponibles sont intégrées automatiquement à J+1 de leur sortie)"
 SELECT MAX(date_deces) "Date"
@@ -24,6 +25,7 @@ WHERE
 .print
 
 .print "@block:open"
+.print "@name:personnes"
 .print "@title:Entrées dans la table des personnes"
 .print "@subtitle:(avec quelques doublons dans les données sources)"
 SELECT
@@ -34,6 +36,7 @@ FROM personnes;
 .print
 
 .print "@block:close"
+.print "@name:oppositions"
 .print "@title:dont personnes ayant fait opposition à l'exploitation de leurs données" 
 SELECT 
     FORMAT('%,d', SUM(opposition = 1)) AS Total,
@@ -43,6 +46,7 @@ FROM personnes;
 .print
 
 .print "@block:close"
+.print "@name:annee-naissance"
 .print "@title:Répartition par année de naissance"
 .print "@subtitle:(année 0 = année non spécifiée ou invalide)"
 SELECT
@@ -56,6 +60,7 @@ ORDER BY annee_naissance ASC;
 .print
 
 .print "@block:close"
+.print "@name:annee-deces"
 .print "@title:Répartition par année de décès"
 .print "@subtitle:(année 0 = année non spécifiée ou invalide)"
 SELECT
@@ -69,6 +74,7 @@ ORDER BY annee_deces ASC;
 .print
 
 .print "@block:close"
+.print "@name:mois-naissance"
 .print "@title:Répartition par mois de naissance"
 .print "@subtitle:(mois ? = mois non spécifié ou invalide)"
 SELECT
@@ -98,6 +104,7 @@ ORDER BY tri DESC;
 .print
 
 .print "@block:close"
+.print "@name:mois-deces"
 .print "@title:Répartition par mois de décès"
 .print "@subtitle:(mois ? = mois non spécifié ou invalide)"
 SELECT
@@ -127,6 +134,7 @@ ORDER BY tri DESC;
 .print
 
 .print "@block:close"
+.print "@name:jour-naissance"
 .print "@title:Répartition par jour de naissance"
 .print "@subtitle:(jour 0 = jour non spécifié ou invalide)"
 SELECT
@@ -141,6 +149,7 @@ ORDER BY tri DESC;
 .print
 
 .print "@block:close"
+.print "@name:jour-deces"
 .print "@title:Répartition par jour de décès"
 .print "@subtitle:(jour 0 = jour non spécifié ou invalide)"
 SELECT
@@ -155,6 +164,7 @@ ORDER BY tri DESC;
 .print
 
 .print "@block:close"
+.print "@name:cog"
 .print "@title:Entrées dans la table des Codes Officiels Géographiques (COG)"
 .print "@subtitle:(incluant les départements depuis 1943)"
 SELECT FORMAT('%,d', COUNT(*)) "Nombre"
@@ -162,6 +172,7 @@ FROM cog;
 .print
 
 .print "@block:close"
+.print "@name:types-cog"
 .print "@title:Répartition par type de Code Officiel Géographique (COG)"
 SELECT
     FORMAT('%,d', COUNT(*)) AS Nombre,
@@ -186,6 +197,7 @@ ORDER BY tri DESC;
 .print
 
 .print "@block:close"
+.print "@name:communes-naissance"
 .print "@title:Top 50 des communes de naissance"
 .print "@subtitle:(nom vide = commune non spécifiée ou invalide)"
 SELECT
@@ -201,6 +213,7 @@ LIMIT 50;
 .print
 
 .print "@block:close"
+.print "@name:communes-deces"
 .print "@title:Top 50 des communes de décès"
 .print "@subtitle:(nom vide = commune non spécifiée ou invalide)"
 SELECT
@@ -216,6 +229,7 @@ LIMIT 50;
 .print
 
 .print "@block:close"
+.print "@name:pays-naissance"
 .print "@title:Top 50 des pays de naissance"
 .print "@subtitle:(nom vide = pays non spécifié ou invalide)"
 SELECT
@@ -234,6 +248,7 @@ LIMIT 50;
 .print
 
 .print "@block:close"
+.print "@name:pays-deces"
 .print "@title:Top 50 des pays de décès"
 .print "@subtitle:(nom vide = pays non spécifié ou invalide)"
 SELECT
@@ -252,12 +267,14 @@ LIMIT 50;
 .print
 
 .print "@block:open"
+.print "@name:noms"
 .print "@title:Noms de familles"
 SELECT FORMAT('%,d', COUNT(DISTINCT(nom))) "Nombre"
 FROM personnes;
 .print
 
 .print "@block:close"
+.print "@name:top-noms"
 .print "@title:Top 500 des noms de familles"
 SELECT
     ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS "Rang",
@@ -271,12 +288,14 @@ LIMIT 500;
 .print
 
 .print "@block:open"
+.print "@name:prenoms"
 .print "@title:Prénoms"
 SELECT FORMAT('%,d', COUNT(*)) "Nombre"
 FROM prenoms;
 .print
 
 .print "@block:close"
+.print "@name:nombre-prenoms"
 .print "@title:Prénoms par personne"
 .print "@subtitle:(y compris des x DIT y et/ou des x ALIAS y)"
 SELECT
@@ -296,6 +315,7 @@ ORDER BY tri DESC;
 .print
 
 #.print "@block:close"
+#.print "@name:10-prenoms"
 #.print "@title:Personnes avec plus de 9 prénoms"
 #SELECT *
 #FROM
@@ -312,6 +332,7 @@ ORDER BY tri DESC;
 #.print
 
 .print "@block:close"
+.print "@name:top-prenoms"
 .print "@title:Top 500 des prénoms"
 .print "@subtitle:(quel que soit leur ordre)"
 SELECT
@@ -329,6 +350,7 @@ LIMIT 500;
 .print
 
 .print "@block:close"
+.print "@name:top-premiers-prenoms"
 .print "@title:Top 500 des premiers prénoms"
 SELECT
     ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS "Rang",
@@ -347,6 +369,7 @@ LIMIT 500;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1890"
 .print "@title:Top 100 des prénoms de 1890 à 1899"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -369,6 +392,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1900"
 .print "@title:Top 100 des prénoms de 1900 à 1909"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -391,6 +415,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1910"
 .print "@title:Top 100 des prénoms de 1910 à 1919"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -413,6 +438,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1920"
 .print "@title:Top 100 des prénoms de 1920 à 1929"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -435,6 +461,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1930"
 .print "@title:Top 100 des prénoms de 1930 à 1939"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -457,6 +484,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1940"
 .print "@title:Top 100 des prénoms de 1940 à 1949"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -479,6 +507,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1950"
 .print "@title:Top 100 des prénoms de 1950 à 1959"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -501,6 +530,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1960"
 .print "@title:Top 100 des prénoms de 1960 à 1969"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -523,6 +553,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1970"
 .print "@title:Top 100 des prénoms de 1970 à 1979"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -545,6 +576,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1980"
 .print "@title:Top 100 des prénoms de 1980 à 1989"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -567,6 +599,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-1990"
 .print "@title:Top 100 des prénoms de 1990 à 1999"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -589,6 +622,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-2000"
 .print "@title:Top 100 des prénoms de 2000 à 2009"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -611,6 +645,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-2010"
 .print "@title:Top 100 des prénoms de 2010 à 2019"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -633,6 +668,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:prenoms-2020"
 .print "@title:Top 100 des prénoms de 2020 à 2029"
 .print "@subtitle:(sur l'année de naissance et le premier prénom)"
 SELECT
@@ -655,6 +691,7 @@ LIMIT 100;
 .print
 
 .print "@block:close"
+.print "@name:centenaires"
 .print "@title:Centenaires"
 SELECT FORMAT('%,d', COUNT(*)) "Nombre"
 FROM personnes
@@ -670,6 +707,7 @@ WHERE
 .print
 
 .print "@block:close"
+.print "@name:supercentenaires"
 .print "@title:Supercentenaires"
 .print "@subtitle:(un supercentenaire est une personne ayant atteint 110 ans)"
 SELECT FORMAT('%,d', COUNT(*)) "Nombre"
@@ -686,6 +724,7 @@ WHERE
 .print
 
 .print "@block:close"
+.print "@name:age-deces"
 .print "@title:Âge au moment du décès"
 .print "@subtitle:(les âges supérieurs au record mondial de 122 ans sont certainement des erreurs)"
 SELECT
@@ -711,6 +750,7 @@ ORDER BY Age DESC;
 .print
 
 .print "@block:close"
+.print "@name:esperance-vie"
 .print "@title:Evolution de l'espérance de vie"
 .print "@subtitle:(sur la base de l'âge moyen au moment du décès, année par année)"
 SELECT 
@@ -754,6 +794,7 @@ ORDER BY annee_deces DESC;
 .print
 
 .print "@block:close"
+.print "@name:age-moyen-deces"
 .print "@title:Âge moyen au moment du décès"
 .print "@subtitle:(sur l'ensemble des données de la base)"
 SELECT ROUND(
@@ -778,6 +819,7 @@ GROUP BY Sexe;
 .print
 
 .print "@block:close"
+.print "@name:erreurs"
 .print "@title:Erreurs dans les données sources"
 SELECT
     libelle AS Erreur,

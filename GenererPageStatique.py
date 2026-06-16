@@ -28,10 +28,16 @@ with open(RESULTAT, "w") as fichier_sortie:
         ligne = ligne.strip()
         if in_block:
             if expecting == "":
+                if ligne.startswith("@name:"):
+                    name = ligne[6:]
                 if ligne.startswith("@title:"):
                     expecting = "header"
                     fichier_sortie.write('    <div class="stat-block-titles">\n')
-                    fichier_sortie.write(f'      <div class="stat-block-title">{ligne[7:]}</div>\n')
+                    if name:
+                        fichier_sortie.write(f'      <div class="stat-block-title"><a name="{name}">{ligne[7:]}</a></div>\n')
+                        name = ""
+                    else:
+                        fichier_sortie.write(f'      <div class="stat-block-title">{ligne[7:]}</div>\n')
                     tri = False
             elif expecting == "header":
                 if ligne.startswith("@subtitle:"):
