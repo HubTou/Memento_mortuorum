@@ -27,7 +27,7 @@ WHERE
 .print "@block:open"
 .print "@name:personnes"
 .print "@title:Entrées dans la table des personnes"
-.print "@subtitle:(avec quelques doublons dans les données sources)"
+.print "@subtitle:(avec quelques doublons résiduels dans les données sources)"
 SELECT
     FORMAT('%,d', COUNT(*)) AS Total,
     FORMAT('%,d', SUM(sexe = 1)) AS Hommes,
@@ -205,6 +205,7 @@ SELECT
     FORMAT('%,d', COUNT(*)) AS Nombre,
     lieu_naissance "COG",
     commune_naissance "Commune",
+    pays_naissance "Pays",
     COUNT(*) AS tri
 FROM personnes
 GROUP BY commune_naissance
@@ -221,6 +222,7 @@ SELECT
     FORMAT('%,d', COUNT(*)) AS Nombre,
     lieu_deces "COG",
     commune_deces "Commune",
+    pays_deces "Pays",
     COUNT(*) AS tri
 FROM personnes
 GROUP BY commune_deces
