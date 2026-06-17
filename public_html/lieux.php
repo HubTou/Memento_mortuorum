@@ -668,6 +668,16 @@ footer.ribbon a svg { flex-shrink: 0; }
         </svg>
         Données sources
     </a>
+    <a href="https://github.com/HubTou/Memento_mortuorum/discussions" target="_blank" rel="noopener noreferrer">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 12h4M6.5 14h3"/>
+            <path d="M8 2a4 4 0 0 1 4 4c0 1.5-.8 2.8-2 3.5V11H6V9.5C4.8 8.8 4 7.5 4 6a4 4 0 0 1 4-4z"/>
+            <line x1="8" y1="2" x2="8" y2="1"/>
+            <line x1="3.5" y1="3.5" x2="2.8" y2="2.8"/>
+            <line x1="12.5" y1="3.5" x2="13.2" y2="2.8"/>
+        </svg>
+        Suggestions
+    </a>
 </footer>
 </body>
 </html>
