@@ -83,10 +83,19 @@ infos = {
     "erreur.actedeces.non_numerique": 0,
     "erreur.opposition.utilisation_multiple": 0,
     "erreur.doublons.complets": 0,
+    "erreur.doublons.sauf_nom": 0,
+    "erreur.doublons.sauf_prenoms": 0,
+    "erreur.doublons.sauf_sexe": 0,
+    "erreur.doublons.sauf_date_naissance": 0,
+    "erreur.doublons.sauf_lieu_naissance": 0,
+    "erreur.doublons.sauf_date_deces": 0,
+    "erreur.doublons.sauf_lieu_deces": 0,
+    "erreur.doublons.sauf_acte_deces": 0,
     "info.opposition.lignes": 0,
     "info.opposition.lignes_inutilisees": 0,
     "info.opposition.lignes_reutilisees": 0,
 }
+
 
 ####################################################################################################
 def Log(criticite, message):
@@ -1130,11 +1139,11 @@ def VerifierOppositions(oppositions):
 ####################################################################################################
 def PurgerDoublons():
     """ Purge les doublons de la base de données """
-    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons =====")
-    t1 = time.perf_counter()
-
     base = sqlite3.connect(BASE_DE_DONNEES)
     curseur = base.cursor()
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons complets =====")
+    t1 = time.perf_counter()
 
     # Doublons complets (tous les champs identiques sauf l'id)
     # comptage :
@@ -1183,11 +1192,435 @@ WHERE id IN (
 
     base.commit()
 
-    curseur.close()
-    base.close()
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification du nom =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et le nom)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                prenoms, sexe, 
+                annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_nom"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       prenoms, sexe, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
 
     t2 = time.perf_counter()
     Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification des prénoms =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, sexe, 
+                annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_prenoms"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, sexe, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification du sexe =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, prenoms, 
+                annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_sexe"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, prenoms, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification de la date de naissance =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, prenoms, sexe,
+                lieu_naissance, commune_naissance, pays_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_date_naissance"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, prenoms, 
+                       lieu_naissance, commune_naissance, pays_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification du lieu de naissance =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, prenoms, sexe,
+                annee_naissance, mois_naissance, jour_naissance, date_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_lieu_naissance"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, prenoms, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification de la date de décès =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, prenoms, sexe,
+                annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                lieu_deces, commune_deces, pays_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_date_deces"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, prenoms, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                       lieu_deces, commune_deces, pays_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification du lieu de décès =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, prenoms, sexe,
+                annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, acte_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_lieu_deces"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, prenoms, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, acte_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Suppression des doublons avant dernière modification de l'acte de décès =====")
+    t1 = time.perf_counter()
+
+    # Doublons complets (tous les champs identiques sauf l'id et les prénoms)
+    # comptage :
+    curseur.execute("""
+WITH doublons AS (
+    SELECT 
+        id,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                nom, prenoms, sexe,
+                annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces,
+                opposition
+            ORDER BY id DESC
+        ) AS rang
+    FROM personnes
+)
+SELECT count(*)
+FROM doublons 
+WHERE rang > 1
+""")
+    ligne = curseur.fetchone()
+    if ligne:
+        infos["erreur.doublons.sauf_acte_deces"] = ligne[0]
+
+    # suppression :
+    curseur.execute("""
+DELETE FROM personnes
+WHERE id IN (
+    SELECT id 
+    FROM (
+        SELECT id, 
+               ROW_NUMBER() OVER (
+                   PARTITION BY 
+                       nom, prenoms, 
+                       annee_naissance, mois_naissance, jour_naissance, date_naissance, lieu_naissance, commune_naissance, pays_naissance,
+                       annee_deces, mois_deces, jour_deces, date_deces, lieu_deces, commune_deces, pays_deces,
+                       opposition
+                   ORDER BY id DESC
+               ) AS rang 
+        FROM personnes
+    ) 
+    WHERE rang > 1
+)
+""")
+
+    base.commit()
+
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    curseur.close()
+    base.close()
 
 ####################################################################################################
 def InsererInfos():
@@ -1232,6 +1665,14 @@ def InsererInfos():
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.actedeces.non_numerique', 'Champ actedeces avec valeur non numérique', infos["erreur.actedeces.non_numerique"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.opposition.utilisation_multiple', 'Opposition utilisée plusieurs fois', infos["erreur.opposition.utilisation_multiple"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.complets', 'Doublons complets', infos["erreur.doublons.complets"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_nom', 'Doublons après modification du nom', infos["erreur.doublons.sauf_nom"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_prenoms', 'Doublons après modification des prénoms', infos["erreur.doublons.sauf_prenoms"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_sexe', 'Doublons après modification du sexe', infos["erreur.doublons.sauf_sexe"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_date_naissance', 'Doublons après modification de la date de naissance', infos["erreur.doublons.sauf_date_naissance"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_lieu_naissance', 'Doublons après modification du lieu de naissance', infos["erreur.doublons.sauf_lieu_naissance"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_date_deces', 'Doublons après modification de la date de décès', infos["erreur.doublons.sauf_date_deces"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_lieu_deces', 'Doublons après modification du lieu de décès', infos["erreur.doublons.sauf_lieu_deces"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_acte_deces', 'Doublons après modification de l''acte de décès', infos["erreur.doublons.sauf_acte_deces"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('info.opposition.lignes', 'Oppositions : nombre de lignes', infos["info.opposition.lignes"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('info.opposition.lignes_inutilisees', 'Oppositions : nombre de lignes inutilisées', infos["info.opposition.lignes_inutilisees"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('info.opposition.lignes_reutilisees', 'Oppositions : nombre de lignes réutilisées', infos["info.opposition.lignes_reutilisees"]))
