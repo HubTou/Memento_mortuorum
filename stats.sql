@@ -752,7 +752,7 @@ ORDER BY Age DESC;
 .print
 
 .print "@block:close"
-.print "@name:esperance-vie"
+.print "@name:evolution-age-moyen-deces"
 .print "@title:Evolution de l'âge moyen au moment du décès"
 .print "@subtitle:(la réalité de l'espérance de vie, en quelque sorte)"
 SELECT 
