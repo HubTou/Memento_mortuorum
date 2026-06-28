@@ -27,7 +27,7 @@ WHERE
 .print "@block:open"
 .print "@name:personnes"
 .print "@title:Entrées dans la table des personnes"
-.print "@subtitle:(avec quelques doublons résiduels dans les données sources)"
+.print "@subtitle:(une fois la plupart des doublons retirés dans les données sources)"
 SELECT
     FORMAT('%,d', COUNT(*)) AS Total,
     FORMAT('%,d', SUM(sexe = 1)) AS Hommes,
@@ -753,8 +753,8 @@ ORDER BY Age DESC;
 
 .print "@block:close"
 .print "@name:esperance-vie"
-.print "@title:Evolution de l'espérance de vie"
-.print "@subtitle:(sur la base de l'âge moyen au moment du décès, année par année)"
+.print "@title:Evolution de l'âge moyen au moment du décès"
+.print "@subtitle:(la réalité de l'espérance de vie, en quelque sorte)"
 SELECT 
     annee_deces AS "Année du décès",
     ROUND(

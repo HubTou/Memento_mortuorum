@@ -8,17 +8,28 @@
 #                                  #
 ####################################
 
-DEBUT = "stats.html.debut"
-DONNEES = "stats.txt"
-FIN = "stats.html.fin"
-RESULTAT = "stats.html"
+import sys
 
-with open(RESULTAT, "w") as fichier_sortie:
-    with open(DEBUT, "r", encoding="utf-8") as fichier_entree:
+if len(sys.argv) == 1:
+    debut_de_fichier = "stats.html.debut"
+    fichier_de_donnees = "stats.txt"
+    fin_de_fichier = "stats.html.fin"
+    fichier_resultat = "stats.html"
+elif len(sys.argv) == 5:
+    debut_de_fichier = sys.argv[1]
+    fichier_de_donnees = sys.argv[2]
+    fin_de_fichier = sys.argv[3]
+    fichier_resultat = sys.argv[4]
+else:
+    print(f"{sys.argv[0]}: ERREUR FATALE: nombre d'arguments incorrect")
+    sys.exit(1)
+
+with open(fichier_resultat, "w") as fichier_sortie:
+    with open(debut_de_fichier, "r", encoding="utf-8") as fichier_entree:
         contenu = fichier_entree.read()
     fichier_sortie.write(contenu)
 
-    with open(DONNEES, "r", encoding="utf-8") as fichier_entree:
+    with open(fichier_de_donnees, "r", encoding="utf-8") as fichier_entree:
         lignes = fichier_entree.readlines()
 
     in_block = False
@@ -85,6 +96,6 @@ with open(RESULTAT, "w") as fichier_sortie:
                 fichier_sortie.write('<div class="stat-block">\n')
                 fichier_sortie.write('  <button class="stat-block-toggle" type="button">\n')
 
-    with open(FIN, "r", encoding="utf-8") as fichier_entree:
+    with open(fin_de_fichier, "r", encoding="utf-8") as fichier_entree:
         contenu = fichier_entree.read()
     fichier_sortie.write(contenu)

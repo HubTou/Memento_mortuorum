@@ -338,9 +338,11 @@ def InsererDepartements():
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('17', 'DEP', 'CHARENTE MARITIME', 'de la Charente Maritime', 'Charente Maritime', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('18', 'DEP', 'CHER', 'Cher', 'du Cher', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('19', 'DEP', 'CORREZE', 'Corrèze', 'de la Corrèze', '00000000', '99999999')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('20', 'DEP', 'CORSE', 'Corse', 'Corse', '00000000', '19753112')")
+
+    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('20', 'DEP', 'CORSE', 'Corse', 'Corse', '00000000', '19751231')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('2A', 'DEP', 'CORSE DU SUD', 'Corse du Sud', 'de la Corse du Sud', '19760101', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('2B', 'DEP', 'HAUTE CORSE', 'Haute Corse', 'de la Haute Corse', '19760101', '99999999')")
+
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('21', 'DEP', 'COTE D''OR', 'Côte d''Or', 'de la Côte d''Or', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('22', 'DEP', 'COTES D''ARMOR', 'Côtes d''Armor', 'des Côtes d''Armor', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('23', 'DEP', 'CREUSE', 'Creuse', 'de la Creuse', '00000000', '99999999')")
@@ -389,20 +391,28 @@ def InsererDepartements():
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('66', 'DEP', 'PYRENEES ORIENTALES', 'Pyrénées Orientales', 'des Pyrénées Orientales', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('67', 'DEP', 'BAS RHIN', 'Bas Rhin', 'du Bas Rhin', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('68', 'DEP', 'HAUT RHIN', 'Haut Rhin', 'du Haut Rhin', '00000000', '99999999')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69', 'DEP', 'RHONE', 'Rhône', 'du Rhône', '00000000', '20143112')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69D', 'DEP', 'RHONE', 'Rhône', 'du Rhône', '20150101', '99999999')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69M', 'DEP', 'METROPOLE DE LYON', 'Métropole de Lyon', 'de la Métropole de Lyon', '20150101', '99999999')")
+
+    # les nouveaux codes 69D et 69M ne sont jamais utilisés
+    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69', 'DEP', 'RHONE', 'Rhône', 'du Rhône', '00000000', '99999999')")
+    #curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69', 'DEP', 'RHONE', 'Rhône', 'du Rhône', '00000000', '20143112')")
+    #curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69D', 'DEP', 'RHONE', 'Rhône', 'du Rhône', '20150101', '99999999')")
+    #curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('69M', 'DEP', 'METROPOLE DE LYON', 'Métropole de Lyon', 'de la Métropole de Lyon', '20150101', '99999999')")
+
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('70', 'DEP', 'HAUTE SAONE', 'Haute Saône', 'de la Haute Saône', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('71', 'DEP', 'SAONE ET LOIRE', 'Saône et Loire', 'de la Saône et Loire', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('72', 'DEP', 'SARTHE', 'Sarthe', 'de la Sarthe', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('73', 'DEP', 'SAVOIE', 'Savoie', 'de la Savoie', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('74', 'DEP', 'HAUTE SAVOIE', 'Haute Savoie', 'de la Haute Savoie', '00000000', '99999999')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('75', 'DEP', 'SEINE', 'Seine', 'de la Seine', '00000000', '19673112')")
+
+    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('75', 'DEP', 'SEINE', 'Seine', 'de la Seine', '00000000', '19671231')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('75', 'DEP', 'PARIS', 'Paris', 'de Paris', '19680101', '99999999')")
+
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('76', 'DEP', 'SEINE MARITIME', 'Seine Maritime', 'de la Seine Maritime', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('77', 'DEP', 'SEINE ET MARNE', 'Seine et Marne', 'de la Seine et Marne', '00000000', '99999999')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('78', 'DEP', 'SEINE ET OISE', 'Seine et Oise', 'de la Seine et Oise', '00000000', '19673112')")
+
+    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('78', 'DEP', 'SEINE ET OISE', 'Seine et Oise', 'de la Seine et Oise', '00000000', '19671231')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('78', 'DEP', 'YVELINES', 'Yvelines', 'des Yvelines', '19680101', '99999999')")
+
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('79', 'DEP', 'DEUX SEVRES', 'Deux Sèvres', 'des Deux Sèvres', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('80', 'DEP', 'SOMME', 'Somme', 'de la Somme', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('81', 'DEP', 'TARN', 'Tarn', 'du Tarn', '00000000', '99999999')")
@@ -415,11 +425,13 @@ def InsererDepartements():
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('88', 'DEP', 'VOSGES', 'Vosges', 'des Vosges', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('89', 'DEP', 'YONNE', 'Yonne', 'de l''Yonne', '00000000', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('90', 'DEP', 'TERRITOIRE DE BELFORT', 'Territoire de Belfort', 'du Territoire de Belfort', '00000000', '99999999')")
+
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('91', 'DEP', 'ESSONNE', 'Essonne', 'de l''Essonne', '19680101', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('92', 'DEP', 'HAUTS DE SEINE', 'Hauts de Seine', 'des Hauts de Seine', '19680101', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('93', 'DEP', 'SEINE SAINT DENIS', 'Seine Saint Denis', 'de la Seine Saint Denis', '19680101', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('94', 'DEP', 'VAL DE MARNE', 'Val de Marne', 'du Val de Marne', '19680101', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('95', 'DEP', 'VAL D''OISE', 'Val d''Oise', 'du Val d''Oise', '19680101', '99999999')")
+
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('971', 'DEP', 'GUADELOUPE', 'Guadeloupe', 'de la Guadeloupe', '19460319', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('972', 'DEP', 'MARTINIQUE', 'Martinique', 'de la Martinique', '19460319', '99999999')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('973', 'DEP', 'GUYANE', 'Guyane', 'de la Guyane', '19460319', '99999999')")
@@ -427,8 +439,8 @@ def InsererDepartements():
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('975', 'DEP', 'GUADELOUPE', 'Guadeloupe', 'de la Guadeloupe', '19460319', '19743112')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('976', 'DEP', 'MARTINIQUE', 'Martinique', 'de la Martinique', '19460319', '19743112')")
     curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('976', 'DEP', 'MAYOTTE', 'Mayotte', 'de Mayotte', '20090320', '99999999')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('977', 'DEP', 'GUYANE', 'Guyane', 'de la Guyane', '19460319', '19743112')")
-    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('978', 'DEP', 'REUNION', 'Réunion', 'de la Réunion', '19460319', '19743112')")
+    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('977', 'DEP', 'GUYANE', 'Guyane', 'de la Guyane', '19460319', '19741231')")
+    curseur.execute("INSERT INTO cog (code, type, nom_maj, nom_riche, libelle, date_debut, date_fin) VALUES ('978', 'DEP', 'REUNION', 'Réunion', 'de la Réunion', '19460319', '19741231')")
 
     base.commit()
 
@@ -1701,6 +1713,34 @@ def CreerIndexes():
     Log(Severite.INFORMATION_IMPORTANTE, "===== Création de l'index sur personnes:nom =====")
     t1 = time.perf_counter()
     curseur.execute("CREATE INDEX index_noms ON personnes(nom)")
+    base.commit()
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Création de l'index sur personnes:date_naissance =====")
+    t1 = time.perf_counter()
+    curseur.execute("CREATE INDEX index_dates_naissance ON personnes(date_naissance)")
+    base.commit()
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Création de l'index sur personnes:lieu_naissance =====")
+    t1 = time.perf_counter()
+    curseur.execute("CREATE INDEX index_lieux_naissance ON personnes(lieu_naissance)")
+    base.commit()
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Création de l'index sur personnes:date_deces =====")
+    t1 = time.perf_counter()
+    curseur.execute("CREATE INDEX index_dates_deces ON personnes(date_deces)")
+    base.commit()
+    t2 = time.perf_counter()
+    Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
+
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Création de l'index sur personnes:lieu_deces =====")
+    t1 = time.perf_counter()
+    curseur.execute("CREATE INDEX index_lieux_deces ON personnes(lieu_deces)")
     base.commit()
     t2 = time.perf_counter()
     Log(Severite.INFORMATION, f"Exécuté en {t2 - t1:.3f} secondes")
