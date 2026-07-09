@@ -1138,6 +1138,7 @@ def InsererFichierDeDeces(nom_fichier, oppositions, cog, table_prenoms):
 ####################################################################################################
 def VerifierOppositions(oppositions):
     """ Vérifie les anomalies dans l'utilisation des oppositions """
+    Log(Severite.INFORMATION_IMPORTANTE, "===== Vérification des oppositions inutilisées =====")
     for date_deces, value1 in oppositions.items():
         for lieu_deces, value2 in value1.items():
             for acte_deces, nb_occurrences in value2.items():
@@ -1684,7 +1685,7 @@ def InsererInfos():
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_lieu_naissance', 'Doublons après modification du lieu de naissance', infos["erreur.doublons.sauf_lieu_naissance"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_date_deces', 'Doublons après modification de la date de décès', infos["erreur.doublons.sauf_date_deces"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_lieu_deces', 'Doublons après modification du lieu de décès', infos["erreur.doublons.sauf_lieu_deces"]))
-    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_acte_deces', 'Doublons après modification de l''acte de décès', infos["erreur.doublons.sauf_acte_deces"]))
+    curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('erreur.doublons.sauf_acte_deces', 'Doublons après modification de l\'acte de décès', infos["erreur.doublons.sauf_acte_deces"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('info.opposition.lignes', 'Oppositions : nombre de lignes', infos["info.opposition.lignes"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('info.opposition.lignes_inutilisees', 'Oppositions : nombre de lignes inutilisées', infos["info.opposition.lignes_inutilisees"]))
     curseur.execute("INSERT INTO infos (cle, libelle, valeur) VALUES (?, ?, ?)", ('info.opposition.lignes_reutilisees', 'Oppositions : nombre de lignes réutilisées', infos["info.opposition.lignes_reutilisees"]))
